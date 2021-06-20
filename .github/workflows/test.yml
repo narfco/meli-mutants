@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,13 +18,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-  codacy-coverage-reporter:
-    runs-on: ubuntu-latest
-    name: codacy-coverage-reporter
-    steps:
-      - uses: actions/checkout@master
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
-           api-token: ${{ secrets.CODACY_TOKEN }}
-          coverage-reports: meli-mutants-infra/build/reports/jacoco/test/jacocoTestReport.xml,meli-mutants-domain/build/reports/jacoco/test/jacocoTestReport.xml
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ./meli-mutants-infra/build/reports/jacoco/test/jacocoTestReport.xml, ./meli-mutants-domain/build/reports/jacoco/test/jacocoTestReport.xml
