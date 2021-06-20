@@ -1,0 +1,4 @@
+rootProject.name = 'meli-mutants'
+include "meli-mutants-domain"
+include "meli-mutants-infra"
+

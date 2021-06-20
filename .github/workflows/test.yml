@@ -1,0 +1,30 @@
+---
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+  codacy-coverage-reporter:
+    runs-on: ubuntu-latest
+    name: codacy-coverage-reporter
+    steps:
+      - uses: actions/checkout@master
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+           api-token: ${{ secrets.CODACY_TOKEN }}
+          coverage-reports: meli-mutants-infra/build/reports/jacoco/test/jacocoTestReport.xml,meli-mutants-domain/build/reports/jacoco/test/jacocoTestReport.xml

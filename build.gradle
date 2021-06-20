@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+
+    }
+}
+
+allprojects {
+    group 'co.com.narfco.meli.mutants'
+    version '1.0-SNAPSHOT'
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    dependencies {
+
+        compileOnly 'org.projectlombok:lombok:1.18.18'
+        annotationProcessor 'org.projectlombok:lombok:1.18.18'
+        implementation 'org.slf4j:slf4j-api:1.7.30'
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+        testImplementation 'org.mockito:mockito-core:3.11.1'
+
+    }
+
+    test {
+        useJUnitPlatform()
+        finalizedBy jacocoTestReport
+    }
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
+    }
+}
+
