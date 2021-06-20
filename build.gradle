@@ -32,6 +32,7 @@ subprojects {
         implementation 'org.slf4j:slf4j-api:1.7.30'
         testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
         testImplementation 'org.mockito:mockito-core:3.11.1'
+        testImplementation group: 'io.projectreactor', name: 'reactor-test', version: '3.4.6'
 
     }
 
