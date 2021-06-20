@@ -13,6 +13,7 @@ import reactor.test.StepVerifier;
 import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.Sample.dnaResultMutant;
 import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.Sample.human;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.when;
 
 public class DnaRepositoryAdapterTest {
@@ -66,5 +67,26 @@ public class DnaRepositoryAdapterTest {
                 .expectError(RepositoryException.class)
                 .verify();
     }
+
+    @Test
+    public void shouldReturnTotalMutantCount() {
+        when(dnaMongoRepository.countByMutant(anyBoolean())).thenReturn(Mono.just(1L));
+        Mono<Long> response =  this.dnaRepositoryAdapter.getTotalMutantCount();
+        StepVerifier
+                .create(response)
+                .expectNext(1L)
+                .verifyComplete();
+    }
+
+    @Test
+    public void shouldReturnErrorWhenTotalMutantCount() {
+        when(dnaMongoRepository.countByMutant(anyBoolean())).thenReturn(Mono.error(new IllegalArgumentException()));
+        Mono<Long> response =  this.dnaRepositoryAdapter.getTotalMutantCount();
+        StepVerifier
+                .create(response)
+                .expectError(RepositoryException.class)
+                .verify();
+    }
+
 
 }

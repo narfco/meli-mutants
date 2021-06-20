@@ -46,6 +46,14 @@ subprojects {
             xml.enabled = true
             html.enabled = true
         }
+        afterEvaluate {
+            classDirectories.from = files(classDirectories.files.collect {
+                fileTree(dir: it,
+                        exclude: ['**/co/com/narfco/meli/mutants/meli/mutants/config/handler/**',
+                                '**/co/com/narfco/meli/mutants/meli/mutants/Application.class**'
+                        ])
+            })
+        }
     }
 }
 

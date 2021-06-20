@@ -10,8 +10,8 @@ import lombok.Getter;
 public class DnaStatsResponse extends GenericResponse {
 
     @JsonProperty("count_mutant_dna")
-    private Long countMutantDna;
+    private final Long countMutantDna;
     @JsonProperty("count_human_dna")
-    private Long countHumanDna;
-    private double ratio;
+    private final Long countHumanDna;
+    private final double ratio;
 }
