@@ -11,6 +11,8 @@ spring:
   webflux:
     base-path: /meli-mutants
   data:
+#    mongodb:
+#      uri: mongodb+srv://url
     mongodb:
       database: application_database
       host: localhost

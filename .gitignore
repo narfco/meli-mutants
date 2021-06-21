@@ -46,3 +46,5 @@ cache.properties.lock
 .idea/workspace.xml
 *.iws
 .gradle/
+../.gradle/
+.idea/
