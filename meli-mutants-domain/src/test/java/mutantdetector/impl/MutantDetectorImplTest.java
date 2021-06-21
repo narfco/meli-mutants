@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static util.Sample.human;
-import static util.Sample.mutant;
+import static util.SampleUtil.human;
+import static util.SampleUtil.mutant;
 
 public class MutantDetectorImplTest {
 

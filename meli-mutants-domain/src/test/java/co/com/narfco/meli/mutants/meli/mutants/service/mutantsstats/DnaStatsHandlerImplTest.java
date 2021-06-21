@@ -10,8 +10,9 @@ import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static util.Sample.dnaStats;
+import static util.SampleUtil.dnaStats;
 
 public class DnaStatsHandlerImplTest {
 
@@ -34,7 +35,9 @@ public class DnaStatsHandlerImplTest {
         Mono<DnaStats> response = this.dnaStatsHandler.getHumanMutantStats();
         StepVerifier
                 .create(response)
-                .expectNext(dnaStats())
+                .consumeNextWith(r -> {
+                    assertEquals(r, dnaStats());
+                })
                 .verifyComplete();
     }
 }

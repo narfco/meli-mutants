@@ -13,10 +13,10 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
 
-import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.Sample.human;
-import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.Sample.invalidDna;
-import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.Sample.invalidDnaLetter;
-import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.Sample.mutant;
+import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.human;
+import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.invalidDna;
+import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.invalidDnaLetter;
+import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.mutant;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 

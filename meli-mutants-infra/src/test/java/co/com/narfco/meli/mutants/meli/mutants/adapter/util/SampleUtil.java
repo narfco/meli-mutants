@@ -3,7 +3,7 @@ package co.com.narfco.meli.mutants.meli.mutants.adapter.util;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.in.dto.HumanDna;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.mongo.dto.DnaResult;
 
-public class Sample {
+public class SampleUtil {
 
 
     public static HumanDna human() {

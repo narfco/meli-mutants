@@ -1,6 +1,6 @@
 FROM openjdk:11.0-jdk-buster
 WORKDIR /opt
-ADD build/libs/meli-mutants-infra-0.0.1-SNAPSHOT.jar /opt/app.jar
+COPY build/libs/meli-mutants-infra-0.0.1-SNAPSHOT.jar /opt/app.jar
 
 RUN sh -c 'touch /opt/app.jar'
 

@@ -3,6 +3,7 @@ package co.com.narfco.meli.mutants.meli.mutants.service.humancheck;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.in.HumanDnaCheckHandler;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.DnaRepository;
 import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.MutantDetector;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -13,7 +14,7 @@ import reactor.test.StepVerifier;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.when;
-import static util.Sample.checkHumanDna;
+import static util.SampleUtil.checkHumanDna;
 
 public class HumanDnaCheckHandlerImplTest {
 
@@ -37,7 +38,7 @@ public class HumanDnaCheckHandlerImplTest {
         Mono<Boolean> response = this.humanDnaCheckHandler.checkHumanDna(checkHumanDna());
         StepVerifier
                 .create(response)
-                .expectNext(true)
+                .consumeNextWith(Assertions::assertTrue)
                 .verifyComplete();
     }
 }

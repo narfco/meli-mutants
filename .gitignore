@@ -48,3 +48,4 @@ cache.properties.lock
 .gradle/
 ../.gradle/
 .idea/
+/.gradle/

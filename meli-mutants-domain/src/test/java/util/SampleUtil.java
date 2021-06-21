@@ -3,7 +3,7 @@ package util;
 import co.com.narfco.meli.mutants.meli.mutants.kernel.command.CheckHumanDna;
 import co.com.narfco.meli.mutants.meli.mutants.kernel.response.DnaStats;
 
-public class Sample {
+public class SampleUtil {
 
 
     public static CheckHumanDna checkHumanDna(){
