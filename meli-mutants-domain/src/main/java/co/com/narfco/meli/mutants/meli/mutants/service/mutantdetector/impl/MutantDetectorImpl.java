@@ -4,9 +4,9 @@ import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.MutantDete
 
 public class MutantDetectorImpl implements MutantDetector {
 
-    private static final int DIRECTIONS = 8;
-    private static final int[] X = {-1, -1, -1, 0, 0, 1, 1, 1};
-    private static final int[] Y = {-1, 0, 1, -1, 1, -1, 0, 1};
+    private static final int DIRECTIONS = 4;
+    private static final int[] X = {0, 1, 1, 1};
+    private static final int[] Y = {1, 1, 0, -1};
 
 
     @Override
@@ -23,7 +23,7 @@ public class MutantDetectorImpl implements MutantDetector {
             for (int col = 0; col < yTotal; col++) {
                 if (searchChain(grid, row, col, xTotal, yTotal)) {
                     count++;
-                    if (count >= 2)
+                    if (count > 1)
                         return true;
                 }
             }

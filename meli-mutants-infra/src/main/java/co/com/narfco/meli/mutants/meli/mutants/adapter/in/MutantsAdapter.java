@@ -4,6 +4,7 @@ import co.com.narfco.meli.mutants.meli.mutants.adapter.in.dto.DnaStatsResponse;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.in.dto.HumanDna;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.in.util.ErrorResponse;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.in.util.GenericResponse;
+import co.com.narfco.meli.mutants.meli.mutants.adapter.in.util.ResponseBuilder;
 import co.com.narfco.meli.mutants.meli.mutants.kernel.command.CheckHumanDna;
 import co.com.narfco.meli.mutants.meli.mutants.kernel.response.DnaStats;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,9 @@ public class MutantsAdapter {
         log.info("Verifying human DNA");
         return humanDnaCheckHandler.checkHumanDna(new CheckHumanDna(humanDna.getDna()))
                 .filter(r -> r)
-                .map(r -> ok())
-                .switchIfEmpty(Mono.just(forbidden()))
-                .onErrorResume(t -> Mono.just(generateErrorResponse(t)));
+                .map(r -> ResponseBuilder.ok())
+                .switchIfEmpty(Mono.just(ResponseBuilder.forbidden()))
+                .onErrorResume(t -> Mono.just(ResponseBuilder.generateErrorResponse(t)));
     }
 
 
@@ -44,27 +45,9 @@ public class MutantsAdapter {
     public Mono<ResponseEntity<GenericResponse>> getStats() {
         log.info("Getting mutants stats");
         return dnaStatsHandler.getHumanMutantStats()
-                .map(this::generateDnaStatsResponse)
-                .map(this::getResponseEntity);
+                .map(ResponseBuilder::generateDnaStatsResponse)
+                .map(ResponseBuilder::getResponseEntity);
     }
 
-    private ResponseEntity<GenericResponse> getResponseEntity(DnaStatsResponse stats) {
-        return ResponseEntity.ok(stats);
-    }
 
-    private DnaStatsResponse generateDnaStatsResponse(DnaStats dnaStats) {
-        return new DnaStatsResponse(dnaStats.getCountMutantDna(), dnaStats.getCountHumanDna(), dnaStats.getRatio());
-    }
-
-    private ResponseEntity<GenericResponse> forbidden() {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-    }
-
-    private ResponseEntity<GenericResponse> ok() {
-        return ResponseEntity.ok().build();
-    }
-
-    private ResponseEntity<GenericResponse> generateErrorResponse(Throwable t) {
-        return new ResponseEntity<GenericResponse>(new ErrorResponse(t.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 }

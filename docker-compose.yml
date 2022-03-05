@@ -2,7 +2,6 @@ version: "3.3"
 services:
   mongodb_server:
     image: mongo
-    command: mongod --serviceExecutor adaptive
     ports:
       - 27017:27017
     environment:
