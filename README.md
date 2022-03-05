@@ -122,7 +122,6 @@ Test cloud:
   ]
   }'`
 
-
 - GET /stats
 
   `curl --request GET \
