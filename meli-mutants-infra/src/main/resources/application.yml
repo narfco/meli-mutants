@@ -12,7 +12,7 @@ spring:
     base-path: /meli-mutants
   data:
 #    mongodb:
-#      uri: mongodb+srv://url
+#      uri: mongodb://mongoadmin:mongoadmin@34.139.165.136:27017/application_database
     mongodb:
       database: application_database
       host: localhost

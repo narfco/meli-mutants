@@ -13,7 +13,7 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static util.SampleUtil.checkHumanDna;
 
 public class HumanDnaCheckHandlerImplTest {
@@ -40,5 +40,7 @@ public class HumanDnaCheckHandlerImplTest {
                 .create(response)
                 .consumeNextWith(Assertions::assertTrue)
                 .verifyComplete();
+        verify(mutantDetector, times(1)).isMutant(checkHumanDna().getDnaChain());
+        verify(dnaRepository, times(1)).saveDnaRecordResult(checkHumanDna().getDnaChain(), true);
     }
 }

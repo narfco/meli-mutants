@@ -1,6 +1,7 @@
 package co.com.narfco.meli.mutants.meli.mutants.adapter.in;
 
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.mongo.repository.DnaMongoRepository;
+import co.com.narfco.meli.mutants.meli.mutants.kernel.command.CheckHumanDna;
 import co.com.narfco.meli.mutants.meli.mutants.kernel.response.DnaStats;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +19,7 @@ import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.in
 import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.invalidDnaLetter;
 import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.mutant;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(SpringExtension.class)
@@ -47,6 +48,7 @@ public class MutantsAdapterTest {
                 .body(BodyInserters.fromValue(mutant()))
                 .exchange()
                 .expectStatus().isOk();
+        verify(humanDnaCheckHandler, times(1)).checkHumanDna(new CheckHumanDna(mutant().getDna()));
     }
 
     @Test
@@ -58,6 +60,8 @@ public class MutantsAdapterTest {
                 .body(BodyInserters.fromValue(human()))
                 .exchange()
                 .expectStatus().isForbidden();
+        verify(humanDnaCheckHandler, times(1)).checkHumanDna(new CheckHumanDna(human().getDna()));
+
     }
 
     @Test
@@ -69,28 +73,32 @@ public class MutantsAdapterTest {
                 .body(BodyInserters.fromValue(mutant()))
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        verify(humanDnaCheckHandler, times(1)).checkHumanDna(new CheckHumanDna(mutant().getDna()));
+
     }
 
     @Test
     public void shouldBadRequestMutant() throws Exception {
-        when(humanDnaCheckHandler.checkHumanDna(any())).thenReturn(Mono.error(new RuntimeException("", null)));
         webTestClient
                 .post()
                 .uri("/mutant")
                 .body(BodyInserters.fromValue(invalidDna()))
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.BAD_REQUEST);
+        verify(humanDnaCheckHandler, times(0)).checkHumanDna(any());
+
     }
 
     @Test
     public void shouldBadRequestLetterMutant() throws Exception {
-        when(humanDnaCheckHandler.checkHumanDna(any())).thenReturn(Mono.error(new RuntimeException("", null)));
         webTestClient
                 .post()
                 .uri("/mutant")
                 .body(BodyInserters.fromValue(invalidDnaLetter()))
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.BAD_REQUEST);
+        verify(humanDnaCheckHandler, times(0)).checkHumanDna(any());
+
     }
 
     @Test
@@ -103,6 +111,8 @@ public class MutantsAdapterTest {
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.OK)
                 .expectBody().json(expectedStats);
+        verify(dnaStatsHandler, times(1)).getHumanMutantStats();
+
     }
 
     @Test
@@ -114,6 +124,8 @@ public class MutantsAdapterTest {
                 .uri("/stats")
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        verify(dnaStatsHandler, times(1)).getHumanMutantStats();
+
     }
 
 

@@ -5,7 +5,7 @@ import co.com.narfco.meli.mutants.meli.mutants.kernel.response.DnaStats;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class ResponseBuilder {
+public class ResponseBuilderHelper {
 
     public static ResponseEntity<GenericResponse> getResponseEntity(DnaStatsResponse stats) {
         return ResponseEntity.ok(stats);

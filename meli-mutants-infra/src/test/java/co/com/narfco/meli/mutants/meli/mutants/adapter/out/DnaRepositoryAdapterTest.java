@@ -1,6 +1,7 @@
 package co.com.narfco.meli.mutants.meli.mutants.adapter.out;
 
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.mongo.DnaRepositoryAdapter;
+import co.com.narfco.meli.mutants.meli.mutants.adapter.out.mongo.dto.DnaResult;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.mongo.repository.DnaMongoRepository;
 import co.com.narfco.meli.mutants.meli.mutants.kernel.exception.RepositoryException;
 import org.junit.jupiter.api.Assertions;
@@ -11,13 +12,15 @@ import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.util.Arrays;
+
 import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.dnaResultMutant;
 import static co.com.narfco.meli.mutants.meli.mutants.adapter.util.SampleUtil.human;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class DnaRepositoryAdapterTest {
 
@@ -39,6 +42,9 @@ public class DnaRepositoryAdapterTest {
                 .create(response)
                 .consumeNextWith(Assertions::assertTrue)
                 .verifyComplete();
+        verify(dnaMongoRepository, times(1))
+                .save(new DnaResult(Arrays.hashCode(human().getDna()), human().getDna(), true));
+
     }
 
     @Test
@@ -51,6 +57,8 @@ public class DnaRepositoryAdapterTest {
                     assertTrue(t instanceof RepositoryException);
                 })
                 .verify();
+        verify(dnaMongoRepository, times(1))
+                .save(new DnaResult(Arrays.hashCode(human().getDna()), human().getDna(), true));
     }
 
     @Test
@@ -63,6 +71,8 @@ public class DnaRepositoryAdapterTest {
                     assertEquals(r, 1L);
                 })
                 .verifyComplete();
+        verify(dnaMongoRepository, times(1))
+                .count();
     }
 
     @Test
@@ -75,6 +85,8 @@ public class DnaRepositoryAdapterTest {
                     assertTrue(t instanceof RepositoryException);
                 })
                 .verify();
+        verify(dnaMongoRepository, times(1))
+                .count();
     }
 
     @Test
@@ -87,6 +99,8 @@ public class DnaRepositoryAdapterTest {
                     assertEquals(r, 1L);
                 })
                 .verifyComplete();
+        verify(dnaMongoRepository, times(1))
+                .countByMutant(true);
     }
 
     @Test
@@ -99,6 +113,8 @@ public class DnaRepositoryAdapterTest {
                     assertTrue(t instanceof RepositoryException);
                 })
                 .verify();
+        verify(dnaMongoRepository, times(1))
+                .countByMutant(true);
     }
 
 
