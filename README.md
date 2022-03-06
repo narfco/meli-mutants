@@ -100,7 +100,7 @@ Test locally:
 - GET /stats
 
    `curl --request GET \
-   --url http://localhost:c8081/meli-mutants/stats`
+   --url http://localhost:8081/meli-mutants/stats`
 
 ### Cloud environment
 
@@ -109,7 +109,7 @@ Test cloud:
 - POST /mutant
 
   `curl --request POST \
-  --url http://35.231.89.28:8081/meli-mutants/mutant \
+  --url http://34.95.163.242:8081/meli-mutants/mutant \
   --header 'Content-Type: application/json' \
   --data '{
   "dna": [
@@ -125,4 +125,4 @@ Test cloud:
 - GET /stats
 
   `curl --request GET \
-  --url http://35.231.89.28:8081/meli-mutants/stats`
+  --url http://34.95.163.242:8081/meli-mutants/stats`
