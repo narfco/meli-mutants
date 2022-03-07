@@ -2,7 +2,7 @@ package co.com.narfco.meli.mutants.meli.mutants.service.humancheck;
 
 import co.com.narfco.meli.mutants.meli.mutants.adapter.in.HumanDnaCheckHandler;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.DnaRepository;
-import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.MutantDetector;
+import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.IMutantDetector;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class HumanDnaCheckHandlerImplTest {
     private HumanDnaCheckHandler humanDnaCheckHandler;
 
     @Mock
-    private MutantDetector mutantDetector;
+    private IMutantDetector mutantDetector;
     @Mock
     private DnaRepository dnaRepository;
 

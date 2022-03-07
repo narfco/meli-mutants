@@ -6,7 +6,7 @@ import co.com.narfco.meli.mutants.meli.mutants.adapter.out.DnaRepository;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.mongo.DnaRepositoryAdapter;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.mongo.repository.DnaMongoRepository;
 import co.com.narfco.meli.mutants.meli.mutants.service.humancheck.HumanDnaCheckHandlerImpl;
-import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.MutantDetector;
+import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.IMutantDetector;
 import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.impl.MutantDetectorImpl;
 import co.com.narfco.meli.mutants.meli.mutants.service.mutantsstats.DnaStatsHandlerImpl;
 import org.springframework.context.annotation.Bean;
@@ -16,17 +16,17 @@ import org.springframework.context.annotation.Configuration;
 public class HandlerConfig {
 
     @Bean
-    public HumanDnaCheckHandler humanDnaCheckHandler(MutantDetector mutantDetector, DnaRepository dnaRepository){
+    public HumanDnaCheckHandler humanDnaCheckHandler(IMutantDetector mutantDetector, DnaRepository dnaRepository){
         return new HumanDnaCheckHandlerImpl(mutantDetector, dnaRepository);
     }
 
     @Bean
-    public DnaStatsHandler dnaStatsHandler(MutantDetector mutantDetector, DnaRepository dnaRepository){
+    public DnaStatsHandler dnaStatsHandler(IMutantDetector mutantDetector, DnaRepository dnaRepository){
         return new DnaStatsHandlerImpl(dnaRepository);
     }
 
     @Bean
-    public MutantDetector mutantDetector(){
+    public IMutantDetector mutantDetector(){
         return new MutantDetectorImpl();
     }
 

@@ -1,8 +1,8 @@
 package co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.impl;
 
-import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.MutantDetector;
+import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.IMutantDetector;
 
-public class MutantDetectorImpl implements MutantDetector {
+public class MutantDetectorImpl implements IMutantDetector {
 
     private static final int DIRECTIONS = 4;
     private static final int[] X = {0, 1, 1, 1};

@@ -3,7 +3,7 @@ package co.com.narfco.meli.mutants.meli.mutants.service.humancheck;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.in.HumanDnaCheckHandler;
 import co.com.narfco.meli.mutants.meli.mutants.adapter.out.DnaRepository;
 import co.com.narfco.meli.mutants.meli.mutants.kernel.command.CheckHumanDna;
-import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.MutantDetector;
+import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.IMutantDetector;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class HumanDnaCheckHandlerImpl implements HumanDnaCheckHandler {
 
-    private final MutantDetector mutantDetector;
+    private final IMutantDetector mutantDetector;
     private final DnaRepository dnaRepository;
 
     @Override

@@ -1,6 +1,6 @@
 package mutantdetector.impl;
 
-import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.MutantDetector;
+import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.IMutantDetector;
 import co.com.narfco.meli.mutants.meli.mutants.service.mutantdetector.impl.MutantDetectorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static util.SampleUtil.mutant;
 
 public class MutantDetectorImplTest {
 
-    private MutantDetector mutantDetector;
+    private IMutantDetector mutantDetector;
 
     @BeforeEach
     public void setUp(){
